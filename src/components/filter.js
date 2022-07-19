@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form } from '../style.js'
+
 
 export function Filter (props) {
     const setInputValMin = props.setInputValMin
@@ -16,7 +16,7 @@ export function Filter (props) {
         setQuery(e.target.value);
     }
 
-    return <Form>
+    return <form>
         <label> Valor mínimo </label>
         <input onChange = {handleInputMin} type = "number"></input>
         <label> Valor máximo </label>
@@ -26,6 +26,6 @@ export function Filter (props) {
         <input type = "reset"></input>
 
 
-    </Form>
+    </form>
 
 }
