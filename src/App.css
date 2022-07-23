@@ -1,5 +1,14 @@
 .App {
   text-align: center;
+  display:flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.Carrinho {
+  height: 20vh;
+  display: flex;
+  background-color: #61dafb;
 }
 
 .App-logo {
