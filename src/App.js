@@ -12,6 +12,7 @@ function App() {
   const [inputValMin, setInputValMin] = useState(-Infinity)
   const [inputValMax, setInputValMax] = useState(Infinity)
   const [query, setQuery] = useState("")
+  const [order, setOrder] = useState("asc")
   const array = [...arrayDeProdutos]
   const [listaDeProdutos, setListaDeProdutos] = useState([...arrayDeProdutos])
   
@@ -34,8 +35,16 @@ function App() {
   function filtroBusca (product){
     return product.name.includes(query)
   }
+
+  const ordenação = (a, b) => {
+    if (order === "asc") {
+      return a.price - b.price
+    } else {
+      return b.price - a.price
+    }
+  }
   
-  const listaFiltrada = array.filter(filtroMin).filter(filtroMax).filter(filtroBusca).map(callback)
+  const listaFiltrada = array.filter(filtroMin).filter(filtroMax).filter(filtroBusca).sort(ordenação).map(callback)
 
   function filtroQuantidade (value) { 
     return value.quantity >= 1;     
@@ -79,7 +88,7 @@ function App() {
   
   return (
     <div className="App">
-      <Filter setInputValMax = {setInputValMax} setInputValMin = {setInputValMin} setQuery = {setQuery} array = {array}></Filter>
+      <Filter order={order} setOrder={setOrder} setInputValMax = {setInputValMax} setInputValMin = {setInputValMin} setQuery = {setQuery}></Filter>
       {listaFiltrada}
       {produtosCarrinho}
     </div>
