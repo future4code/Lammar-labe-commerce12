@@ -1,5 +1,5 @@
 import React from 'react';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import {Cards} from "./componentes/Cards"
@@ -15,8 +15,25 @@ function App() {
   const [order, setOrder] = useState("asc")
   const array = [...arrayDeProdutos]
   const [listaDeProdutos, setListaDeProdutos] = useState([...arrayDeProdutos])
+  const [carrinhoStorage, setCarrinhoStorage] = useState([])
   
 
+
+  useEffect( () => {
+    if (localStorage.getItem("carrinho") === null) {
+      localStorage.setItem("carrinho",JSON.stringify(listaDeProdutos))
+    }
+    else {
+      setCarrinhoStorage(JSON.parse(localStorage.getItem("carrinho")))
+      setListaDeProdutos(JSON.parse(localStorage.getItem("carrinho")))
+    }
+  }, [])
+
+
+  useEffect( () => {
+    localStorage.setItem("carrinho",JSON.stringify(listaDeProdutos) )
+    setCarrinhoStorage(JSON.parse(localStorage.getItem("carrinho")))
+  }, [listaDeProdutos])
 
 
 
@@ -54,7 +71,7 @@ function App() {
     return <CarrinhoDeProdutos removeCart = {removeCart} key = {cartProduct.id} id = {cartProduct.id} photo = {cartProduct.photo} quantity = {cartProduct.quantity} price = {cartProduct.price * cartProduct.quantity} name = {cartProduct.name} />
   }
 
-  const produtosCarrinho = listaDeProdutos.filter(filtroQuantidade).map(callbackCarrinho)
+  const produtosCarrinho = carrinhoStorage.filter(filtroQuantidade).map(callbackCarrinho)
 
     function addCart (id) {
     setListaDeProdutos(listaDeProdutos.map(value => 
@@ -76,7 +93,6 @@ function App() {
         return {...value}
       }
       ))
-
   }
 
 
