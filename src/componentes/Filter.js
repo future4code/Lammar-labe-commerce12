@@ -1,4 +1,5 @@
 import React from 'react'
+import {StyleFilter} from './style'
 
 
 export function Filter(props) {
@@ -16,7 +17,7 @@ export function Filter(props) {
         setQuery(e.target.value);
     }
 
-    return <form>
+    return <StyleFilter>
         <label> Valor mínimo </label>
         <input onChange={handleInputMin} type="number"></input>
         <label> Valor máximo </label>
@@ -32,6 +33,6 @@ export function Filter(props) {
             <option value={"desc"}>Decrescente</option>
         </select>
 
-    </form>
+    </StyleFilter>
 
 }

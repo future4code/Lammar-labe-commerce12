@@ -1,6 +1,6 @@
 import React from 'react';
+import { MainContainer, Products, ContainerFilter } from './componentes/style';
 import {useState, useEffect} from 'react';
-import logo from './logo.svg';
 import './App.css';
 import {Cards} from "./componentes/Cards"
 import { Filter } from './componentes/Filter';
@@ -103,11 +103,17 @@ function App() {
 
   
   return (
-    <div className="App">
-      <Filter order={order} setOrder={setOrder} setInputValMax = {setInputValMax} setInputValMin = {setInputValMin} setQuery = {setQuery}></Filter>
-      {listaFiltrada}
-      {produtosCarrinho}
-    </div>
+    <MainContainer>
+        <div>
+             <Filter order={order} setOrder={setOrder} setInputValMax = {setInputValMax} setInputValMin = {setInputValMin} setQuery = {setQuery}></Filter>
+        </div>
+        <Products>
+            {listaFiltrada}
+        </Products>
+        <div>
+            {produtosCarrinho}
+        </div>
+    </MainContainer>
   );
 }
 
